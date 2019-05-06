@@ -111,6 +111,7 @@ a{
     border-radius: 5px;
     color: #ffffff;
     font-size: 12px;
+    margin-left: 5px;
 }
 .el-button-primary{
     background-color: #009688;
@@ -119,6 +120,15 @@ a{
 .el-button-secondary{
     background-color: rgb(209, 98, 19);
     width: 100px;
+}
+
+.el-button-text-primary{
+  color: #009688;
+  border: solid 1px #009688;
+}
+.el-button-text-secondary{
+  color: rgb(255, 11, 11);
+  border: solid 1px rgb(255, 11, 11);
 }
 
 .el-group .el-group-item{

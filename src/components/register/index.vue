@@ -5,15 +5,25 @@
       <div class="el-form">
         <div class="el-form-item">
           <div class="el-form-content">
-            <div class="el-form-label">
-              <i class="iconfont icon-yidongduanicon-"></i>
-              <label for="account">身份</label>
-            </div>
             <div class="el-form-input">
-              <select type="text" id="account" name="account" class="el-select-inner" autofocus>
-                <option value="1">学生</option>
-                <option value="2">老师</option>
-              </select>
+              <div class="identity-select">
+                <div class="mui-radio mui-left">
+                  <input type="radio" name="identity" id="student">
+                  <label for="student">学生</label>
+                </div>
+              </div>
+              <div class="identity-select">
+                <div class="mui-radio mui-left">
+                  <input type="radio" name="identity" id="teacher">
+                  <label for="teacher">教师</label>
+                </div>
+              </div>
+              <div class="identity-select">
+                <div class="mui-radio mui-left">
+                  <input type="radio" name="identity" id="manger">
+                  <label for="manger">管理员</label>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -68,5 +78,21 @@ export default {};
 </script>
 
 <style>
+.identity-select{
+  float: left;
+  margin-bottom: 20px
+}
+.mui-radio.mui-left label {
+    padding-right: 10px;
+    padding-left: 45px;
+}
+.mui-radio.mui-left input[type='radio']{
+  width: 20px;
+  height: 20px;
+  top: 0px;
+}
+.mui-radio input[type='radio']:before{
+  font-size: 20px;
+}
 </style>
 

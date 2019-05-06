@@ -10,13 +10,17 @@
     <nav class="mui-bar mui-bar-tab">
       <a class="mui-tab-item mui-active" @click="switchBar(0)">
         <span class="mui-icon mui-icon-home"></span>
-        <span class="mui-tab-label">首页</span>
+        <span class="mui-tab-label">学生</span>
       </a>
       <a class="mui-tab-item" @click="switchBar(1)">
         <span class="mui-icon mui-icon-list"></span>
-        <span class="mui-tab-label">已完成</span>
+        <span class="mui-tab-label">教师</span>
       </a>
       <a class="mui-tab-item" @click="switchBar(2)">
+        <span class="mui-icon mui-icon-contact"></span>
+        <span class="mui-tab-label">新增</span>
+      </a>
+      <a class="mui-tab-item" @click="switchBar(3)">
         <span class="mui-icon mui-icon-contact"></span>
         <span class="mui-tab-label">我的</span>
       </a>
@@ -35,18 +39,23 @@ export default {
       switch (index) {
         case 0:
           this.$router.push({
-            path: "/uncomputed"
+            path: "/studentmanger"
           });
           break;
         case 1:
           this.$router.push({
-            path: "/computed"
+            path: "/teachermanger"
           });
           break;
         case 2:
           this.$router.push({
-            path: "/person"
+            path: "/taskAdd"
           });
+          break;
+          case 3:
+          this.$router.push({
+              path:"/mangerMessage"
+          })
           break;
         default:
           break;

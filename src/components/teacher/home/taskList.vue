@@ -5,8 +5,8 @@
         <div class="el-group-item" v-for="(item,index) in taskList" v-bind:key="item.id">
           <router-link to="/marktask"><div class="task-message">{{index+1}}. {{item.name}}</div></router-link>
           <span class="task-operator">
-            <button type="button" class="el-button el-button-secondary task-edit" @click="deleteTask">删除</button>
-            <router-link to="/publishTask"><button type="button" class="el-button el-button-primary task-edit">编辑</button></router-link>
+            <button type="button" class="el-button el-button-text-secondary task-edit" @click="deleteTask">删除</button>
+            <router-link to="/publishTask"><button type="button" class="el-button el-button-text-primary task-edit">编辑</button></router-link>
           </span>
         </div>
       </div>

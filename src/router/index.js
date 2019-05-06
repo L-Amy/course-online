@@ -14,6 +14,11 @@ import PublishTask from '@/components/teacher/home/publishTask'
 import StudentList from '@/components/teacher/home/studentList'
 import TeacherMessage from '@/components/teacher/home/person'
 import MarkTask from '@/components/teacher/markTask/index'
+import MangerHome from '@/components/manger/home/index'
+import StudentManger from '@/components/manger/home/student/index'
+import Teachermanger from '@/components/manger/home/teacher/index'
+import TaskAdd from '@/components/manger/home/taskAdd/index'
+import MangerMessage from '@/components/manger/home/person/index'
 
 Vue.use(Router)
 
@@ -87,5 +92,29 @@ export default new Router({
         }
       ]
     },
+    {
+      path:'/mangerHome',
+      name:'mangerHome',
+      component:MangerHome,
+      redirect:'/studentmanger',
+      children:[
+        {
+          path:'/studentmanger',
+          component:StudentManger,
+        },
+        {
+          path:'/teachermanger',
+          component:Teachermanger,
+        },
+        {
+          path:'/taskAdd',
+          component:TaskAdd,
+        },
+        {
+          path:'/mangerMessage',
+          component:MangerMessage
+        }
+      ]
+    }
   ]
 })

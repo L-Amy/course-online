@@ -1,6 +1,6 @@
 <template>
     <div class="mui-content">
-      <div class="uncomputed-icon"><i class="iconfont icon-nanguo"></i>  未完成</div>
+      <div class="uncomputed-icon-header"><i class="iconfont icon-nanguo"></i>  未完成</div>
       <div class="el-container">
         <div class="el-group">
           <router-link to="/uncomputedEdit"><div class="el-group-item" v-for="item in taskList" v-bind:key="item.id">{{item.name}}</div></router-link>
@@ -31,7 +31,7 @@ export default {
 };
 </script>
 <style>
-.uncomputed-icon{
+.uncomputed-icon-header{
   color: #ffffff;
   text-align: center;
   height: 40px;

@@ -1,6 +1,6 @@
 <template>
   <div class="mui-content">
-    <div class="computed-icon"><i class="iconfont icon-kaixin"></i>  已完成</div>
+    <div class="computed-icon-header"><i class="iconfont icon-kaixin"></i>  已完成</div>
      <div class="el-container">
         <div class="el-group">
           <router-link to="/taskDetail">
@@ -36,7 +36,7 @@ export default {
 </script>
 
 <style>
-.computed-icon{
+.computed-icon-header{
   color: #ffffff;
   text-align: center;
   height: 40px;
