@@ -1,9 +1,9 @@
 <template>
     <div class="mui-content">
-      <div class="uncomputed-icon-header"><i class="iconfont icon-nanguo"></i>  未完成</div>
+      <div class="uncomputed-icon-header"><i class="iconfont icon-nanguo"></i>未完成</div>
       <div class="el-container">
         <div class="el-group">
-          <router-link to="/uncomputedEdit"><div class="el-group-item" v-for="item in taskList" v-bind:key="item.id">{{item.name}}</div></router-link>
+          <router-link to="/uncomputedEdit"><div class="el-group-item" v-for="(item,index) in taskList" v-bind:key="item.id">{{index+1}}. {{item.name}}</div></router-link>
         </div>
       </div>
     </div>
@@ -34,9 +34,9 @@ export default {
 .uncomputed-icon-header{
   color: #ffffff;
   text-align: center;
-  height: 40px;
+  height: 30px;
   background-color:#ff0000;
-  line-height: 40px;
+  line-height: 30px;
   font-weight: bolder;
 }
 </style>

@@ -18,12 +18,39 @@
               class="el-button el-button-text-secondary task-edit"
               @click="deleteTask"
             >删除</button>
-            <router-link to="/publishTask">
+            <router-link to="/personAdd">
               <button type="button" class="el-button el-button-text-primary task-edit">编辑</button>
             </router-link>
           </span>
         </div>
       </div>
+    </div>
+    <div class="choose-modal" id="openPopover" @click="TogglePopover">
+      <div class="choose-button">班级</div>
+    </div>
+    <div id="popover" class="mui-popover">
+      <ul class="mui-table-view">
+        <li class="mui-table-view-cell">
+          <a href="#">
+            <i class="iconfont icon-myclass"></i> 一班
+          </a>
+        </li>
+        <li class="mui-table-view-cell">
+          <a href="#">
+            <i class="iconfont icon-myclass"></i> 二班
+          </a>
+        </li>
+        <li class="mui-table-view-cell">
+          <a href="#">
+            <i class="iconfont icon-myclass"></i> 三班
+          </a>
+        </li>
+        <li class="mui-table-view-cell">
+          <a href="#">
+            <i class="iconfont icon-myclass"></i> 四班
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -114,6 +141,13 @@ export default {
           return;
         }
       });
+    },
+
+    TogglePopover: function() {
+      mui(".mui-popover").popover(
+        "toggle",
+        document.getElementById("openPopover")
+      );
     }
   }
 };

@@ -49,7 +49,7 @@ export default {
           break;
         case 2:
           this.$router.push({
-            path: "/taskAdd"
+            path: "/personAdd"
           });
           break;
           case 3:

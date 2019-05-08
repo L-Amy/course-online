@@ -1,14 +1,14 @@
 <template>
   <div class="mui-content">
     <div class="head-portrait">
-        <img src="@/assets/img/studentImg.jpg" alt="">
+      <img src="@/assets/img/studentImg.jpg" alt>
     </div>
     <div class="person-message">
       <div class="el-form">
-          <div class="el-form-item">
+        <div class="el-form-item">
           <div class="el-form-content">
             <div class="el-form-label">
-              <i class="iconfont icon-yidongduanicon-"></i>
+              <i class="iconfont icon-xingming"></i>
               <label>姓名 :</label>
             </div>
             <div class="el-form-text">
@@ -27,7 +27,7 @@
             </div>
           </div>
         </div>
-       <div class="el-form-item">
+        <div class="el-form-item">
           <div class="el-form-content">
             <div class="el-form-label">
               <i class="iconfont icon-xueyuan"></i>
@@ -35,17 +35,6 @@
             </div>
             <div class="el-form-text">
               <div class="el-text-inner">理学院</div>
-            </div>
-          </div>
-        </div>
-        <div class="el-form-item">
-          <div class="el-form-content">
-            <div class="el-form-label">
-              <i class="iconfont icon-myclass"></i>
-              <label>性别 :</label>
-            </div>
-            <div class="el-form-text">
-              <div class="el-text-inner">男</div>
             </div>
           </div>
         </div>
@@ -63,25 +52,25 @@
         <div class="el-form-item">
           <div class="el-form-content">
             <div class="el-form-label">
-              <i class="iconfont icon-xuehao"></i>
-              <label>学号 :</label>
+              <i class="iconfont icon-xingbie"></i>
+              <label>性别 :</label>
             </div>
             <div class="el-form-text">
-              <div class="el-text-inner">152210501201</div>
+              <div class="el-text-inner">男</div>
             </div>
           </div>
         </div>
         <div class="el-form-item">
           <div class="el-form-content">
             <div class="el-form-label">
-              <i class="iconfont icon-xuehao"></i>
-              <label>学号</label>
+              <i class="iconfont icon-shengri1"></i>
+              <label>生日 :</label>
             </div>
             <div class="el-form-text">
-              <div class="el-text-inner">152210501201</div>
+              <div class="el-text-inner">1987-08-09</div>
             </div>
           </div>
-        </div>      
+        </div>
       </div>
     </div>
   </div>

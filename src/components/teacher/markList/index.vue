@@ -15,7 +15,7 @@
             <div class="mui-scroll">
               <div class="el-group">
                 <div class="el-group-item" v-for="(item,index) in taskList"
-                  v-bind:key="item.id"><router-link to="/markDetail">{{index+1}}. {{item.name}}</router-link></div>
+                  v-bind:key="item.id">{{index+1}}. {{item.name}}</div>
               </div>
             </div>
           </div>
@@ -25,7 +25,7 @@
             <div class="mui-scroll">
               <div class="el-group">
                 <div class="el-group-item" v-for="(item,index) in taskList"
-                  v-bind:key="item.id">{{index+1}}. {{item.name}} 批阅</div>
+                  v-bind:key="item.id"><router-link to="markTask">{{index+1}}. {{item.name}} 批阅</router-link></div>
               </div>
             </div>
           </div>

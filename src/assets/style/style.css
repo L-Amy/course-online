@@ -44,6 +44,12 @@ a{
     width: calc(100vh / 3 - 20px);
     margin: 0px 10px;
 }
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+  color: #009688;
+}
+.mui-segmented-control.mui-segmented-control-inverted ~ .mui-slider-progress-bar{
+  background-color: #009688 !important;
+}
 
 /* 登陆 */
 .el-login-container{
@@ -130,7 +136,24 @@ a{
   color: rgb(255, 11, 11);
   border: solid 1px rgb(255, 11, 11);
 }
-
+.choose-modal {
+  position: fixed;
+  bottom: 70px;
+  right: 10px;
+  height: 50px;
+  width: 50px;
+  line-height: 50px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: rgb(252, 110, 8);
+  z-index: 1000;
+  color: #ffffff;
+}
+.mui-popover {
+  position: fixed;
+  width: 170px;
+  /* height: 350px; */
+}
 .el-group .el-group-item{
     margin-top: 5px;
     border-radius: 2px;
@@ -176,13 +199,10 @@ a{
     float: right;
   }
   .edit-frame {
-    background-color: #ffffff;
-    display: none;
+    margin-bottom: 10px;
   }
   .edit-frame textarea {
     border: solid 1px #ddd9d9;
-    width: 95%;
-    margin: 0 auto;
     display: block;
   }
   .edit-frame-button {
@@ -228,3 +248,5 @@ a{
   .person-message .el-form-label{
     font-size: 13px;
   }
+
+  

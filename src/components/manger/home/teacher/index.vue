@@ -18,7 +18,7 @@
               class="el-button el-button-text-secondary task-edit"
               @click="deleteTask"
             >删除</button>
-            <router-link to="/publishTask">
+            <router-link to="/personAdd">
               <button type="button" class="el-button el-button-text-primary task-edit">编辑</button>
             </router-link>
           </span>

@@ -8,16 +8,21 @@ import Computed from '@/components/student/home/computed'
 import Person from '@/components/student/home/person'
 import UncomputedEdit from '@/components/student/Edit/uncomputedEdit'
 import TaskDetail from "@/components/student/Detail/taskDetail"
+import MarkDetail from "@/components/student/marked/index"
+
 import TeacherHome from '@/components/teacher/home/index'
 import TaskList from '@/components/teacher/home/taskList'
 import PublishTask from '@/components/teacher/home/publishTask'
 import StudentList from '@/components/teacher/home/studentList'
 import TeacherMessage from '@/components/teacher/home/person'
-import MarkTask from '@/components/teacher/markTask/index'
+import AnswerQuestion from '@/components/teacher/markTask/index'
+import MarkTask from '@/components/teacher/answerQuestion/index'
+import MarkList from '@/components/teacher/markList/index'
+
+import PersonAdd from '@/components/manger/home/personAdd/index'
 import MangerHome from '@/components/manger/home/index'
 import StudentManger from '@/components/manger/home/student/index'
 import Teachermanger from '@/components/manger/home/teacher/index'
-import TaskAdd from '@/components/manger/home/taskAdd/index'
 import MangerMessage from '@/components/manger/home/person/index'
 
 Vue.use(Router)
@@ -50,6 +55,11 @@ export default new Router({
           path: '/taskDetail',
           name: 'taskDetail',
           component: TaskDetail,
+        },
+        {
+          path:'/markDetail',
+          name:'markDetail',
+          component:MarkDetail,
         }
       ]
     },
@@ -89,6 +99,13 @@ export default new Router({
           path:'/marktask',
           name:'marktask',
           component:MarkTask
+        },{
+          path:'/answerQuestion',
+          name:'answerQuestion',
+          component:AnswerQuestion,
+        },{
+          path:'/markList',
+          component:MarkList,
         }
       ]
     },
@@ -107,8 +124,9 @@ export default new Router({
           component:Teachermanger,
         },
         {
-          path:'/taskAdd',
-          component:TaskAdd,
+          path:'/personAdd',
+          name:'personAdd',
+          component:PersonAdd,
         },
         {
           path:'/mangerMessage',

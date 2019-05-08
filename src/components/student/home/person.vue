@@ -8,7 +8,7 @@
          <div class="el-form-item">
           <div class="el-form-content">
             <div class="el-form-label">
-              <i class="iconfont icon-yidongduanicon-"></i>
+              <i class="iconfont icon-xingming"></i>
               <label>姓名 :</label>
             </div>
             <div class="el-form-text">
@@ -63,22 +63,22 @@
         <div class="el-form-item">
           <div class="el-form-content">
             <div class="el-form-label">
-              <i class="iconfont icon-xuehao"></i>
-              <label>学号 :</label>
+              <i class="iconfont icon-xingbie"></i>
+              <label>性别 :</label>
             </div>
             <div class="el-form-text">
-              <div class="el-text-inner">152210501201</div>
+              <div class="el-text-inner">女</div>
             </div>
           </div>
         </div>
         <div class="el-form-item">
           <div class="el-form-content">
             <div class="el-form-label">
-              <i class="iconfont icon-xuehao"></i>
-              <label>学号</label>
+              <i class="iconfont icon-shengri1"></i>
+              <label>生日</label>
             </div>
             <div class="el-form-text">
-              <div class="el-text-inner">152210501201</div>
+              <div class="el-text-inner">1998-04-06</div>
             </div>
           </div>
         </div>      
