@@ -1,6 +1,6 @@
 
 // 讨论页面
-function showReplayFrame(event) {
+export function showReplayFrame(event) {
     var editElement = $("#edit");
     $('.edit-frame').show();
     $(event.target)
@@ -9,7 +9,7 @@ function showReplayFrame(event) {
     $(event.target).hide();
   }
 
-  function hideReplayFrame(event) {
+ export function hideReplayFrame(event) {
     $(event.target)
       .parents(".edit-frame")
       .hide();
@@ -19,11 +19,11 @@ function showReplayFrame(event) {
       .show();
   }
 
-  function SelectImg() {
+  export function SelectImg() {
     $("#imgLocal").click();
   }
-
-  function UplodeImg() {
+//上传图片
+  export function UplodeImg() {
     var imgData = document.getElementById('imgLocal').files[0];
      console.log(imgData);
     var formData = new FormData();
@@ -38,9 +38,9 @@ function showReplayFrame(event) {
     formData.append('myfile',document.getElementById('imgLocal').files[0]);
   }
 
-  export{
-    showReplayFrame,
-    hideReplayFrame,
-    SelectImg,
-    UplodeImg,
-  };
+  //弹框
+  export function AlertMessage(message){
+    mui.alert(message,'警告','确定',function(res){
+      return;
+    })
+  }
