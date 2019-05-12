@@ -1,74 +1,64 @@
 <template>
   <div class="mui-content">
     <div class="head-portrait">
-      <img src="@/assets/img/studentImg.jpg" alt>
+      <img src id="imgShow" style="display:none">
+      <input
+        type="file"
+        id="imgLocal"
+        accept="image/png, image/jpeg, image/gif, image/jpg"
+        @change="UplodeImg"
+      >
+      <div class="upload-image" @click="SelectImg">上传图片</div>
     </div>
-    <div class="person-message">
-      <div class="el-form">
-        <div class="el-form-item">
-          <div class="el-form-content">
-            <div class="el-form-label">
-              <i class="iconfont icon-xingming"></i>
-              <label>姓名 :</label>
-            </div>
-            <div class="el-form-text">
-              <div class="el-text-inner">吴建成</div>
-            </div>
+    <div class="el-form">
+      <div class="el-form-item">
+        <div class="el-form-content">
+          <div class="el-form-label">
+            <i class="iconfont icon-xingming"></i>
+            <label for="password">姓名：</label>
+          </div>
+          <div class="el-form-input">
+            <input type="password" name="password" id="password" class="el-input-inner">
           </div>
         </div>
-        <div class="el-form-item">
-          <div class="el-form-content">
-            <div class="el-form-label">
-              <i class="iconfont icon-xuehao"></i>
-              <label>工号 :</label>
-            </div>
-            <div class="el-form-text">
-              <div class="el-text-inner">152210501201</div>
-            </div>
+      </div>
+      <div class="el-form-item">
+        <div class="el-form-content">
+          <div class="el-form-label">
+            <i class="iconfont icon-gonghao"></i>
+            <label for="password">工号：</label>
+          </div>
+          <div class="el-form-input">
+            <input type="number" name="number" id="password" class="el-input-inner">
           </div>
         </div>
-        <div class="el-form-item">
-          <div class="el-form-content">
-            <div class="el-form-label">
-              <i class="iconfont icon-xueyuan"></i>
-              <label>学院 :</label>
-            </div>
-            <div class="el-form-text">
-              <div class="el-text-inner">理学院</div>
-            </div>
+      </div>
+      <div class="el-form-item">
+        <div class="el-form-content">
+          <div class="el-form-label">
+            <i class="iconfont icon-yidongduanicon-"></i>
+            <label for="account">学院：</label>
+          </div>
+          <div class="el-form-input">
+            <input type="text" id="account" name="account" class="el-input-inner">
           </div>
         </div>
-        <div class="el-form-item">
-          <div class="el-form-content">
-            <div class="el-form-label">
-              <i class="iconfont icon-zhuanye"></i>
-              <label>专业 :</label>
-            </div>
-            <div class="el-form-text">
-              <div class="el-text-inner">信息与计算科学</div>
-            </div>
+      </div>
+      <div class="el-form-item">
+        <div class="el-form-content">
+          <div class="el-form-label">
+            <i class="iconfont icon-xingbie"></i>
+            <label for="password">性别：</label>
+          </div>
+          <div class="el-form-input">
+            <input type="password" name="password" id="password" class="el-input-inner">
           </div>
         </div>
-        <div class="el-form-item">
-          <div class="el-form-content">
-            <div class="el-form-label">
-              <i class="iconfont icon-xingbie"></i>
-              <label>性别 :</label>
-            </div>
-            <div class="el-form-text">
-              <div class="el-text-inner">男</div>
-            </div>
-          </div>
-        </div>
-        <div class="el-form-item">
-          <div class="el-form-content">
-            <div class="el-form-label">
-              <i class="iconfont icon-shengri1"></i>
-              <label>生日 :</label>
-            </div>
-            <div class="el-form-text">
-              <div class="el-text-inner">1987-08-09</div>
-            </div>
+      </div>
+      <div class="el-from-item">
+        <div class="el-form-content">
+          <div class="add-person">
+            <button type="button" class="el-button el-button-primary">保存</button>
           </div>
         </div>
       </div>
@@ -76,11 +66,39 @@
   </div>
 </template>
 <script>
+import { SelectImg, UplodeImg } from "@/assets/js/index.js";
 export default {
-  name: "Person"
+  name: "Person",
+  data() {
+    return {};
+  },
+  created: function() {
+    var _self = this;
+  },
+  methods: {
+    SelectImg: function() {
+      SelectImg();
+    },
+    UplodeImg: function() {
+      UplodeImg();
+    }
+  }
 };
 </script>
 <style>
+input[type="file"] {
+  height: 1px;
+  width: 1px;
+  opacity: 0;
+}
+.add-person {
+  margin: 0 auto;
+  text-align: center;
+}
+.upload-image {
+  text-align: center;
+}
 </style>
+
 
 

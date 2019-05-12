@@ -1,95 +1,125 @@
 <template>
   <div class="mui-content">
     <div class="head-portrait">
-        <img src="@/assets/img/studentImg.jpg" alt="">
+      <img src id="imgShow" style="display:none">
+      <input
+        type="file"
+        id="imgLocal"
+        accept="image/png, image/jpeg, image/gif, image/jpg"
+        @change="UplodeImg"
+      >
+      <div class="upload-image" @click="SelectImg">上传图片</div>
     </div>
-    <div class="person-message">
-      <div class="el-form">
-         <div class="el-form-item">
-          <div class="el-form-content">
-            <div class="el-form-label">
-              <i class="iconfont icon-xingming"></i>
-              <label>姓名 :</label>
-            </div>
-            <div class="el-form-text">
-              <div class="el-text-inner">安继兰</div>
-            </div>
+    <div class="el-form">
+      <div class="el-form-item">
+        <div class="el-form-content">
+          <div class="el-form-label">
+            <i class="iconfont icon-xingming"></i>
+            <label for="password">姓名：</label>
+          </div>
+          <div class="el-form-input">
+            <input type="password" name="password" id="password" class="el-input-inner">
           </div>
         </div>
-        <div class="el-form-item">
-          <div class="el-form-content">
-            <div class="el-form-label">
-              <i class="iconfont icon-xuehao"></i>
-              <label>学号 :</label>
-            </div>
-            <div class="el-form-text">
-              <div class="el-text-inner">152210501201</div>
-            </div>
+      </div>
+      <div class="el-form-item">
+        <div class="el-form-content">
+          <div class="el-form-label">
+            <i class="iconfont icon-xuehao"></i>
+            <label for="number">学号：</label>
+          </div>
+          <div class="el-form-input">
+            <input type="number" name="number" id="number" class="el-input-inner" v-model="request.number">
           </div>
         </div>
-       <div class="el-form-item">
-          <div class="el-form-content">
-            <div class="el-form-label">
-              <i class="iconfont icon-xueyuan"></i>
-              <label>学院 :</label>
-            </div>
-            <div class="el-form-text">
-              <div class="el-text-inner">理学院</div>
-            </div>
+      </div>
+      <div class="el-form-item">
+        <div class="el-form-content">
+          <div class="el-form-label">
+            <i class="iconfont icon-yidongduanicon-"></i>
+            <label for="colleague">学院：</label>
+          </div>
+          <div class="el-form-input">
+            <input type="text" id="colleague" name="colleague" class="el-input-inner" v-model="request.colleague">
           </div>
         </div>
-        <div class="el-form-item">
-          <div class="el-form-content">
-            <div class="el-form-label">
-              <i class="iconfont icon-myclass"></i>
-              <label>班级 :</label>
-            </div>
-            <div class="el-form-text">
-              <div class="el-text-inner">一班</div>
-            </div>
+      </div>
+      <div class="el-form-item">
+        <div class="el-form-content">
+          <div class="el-form-label">
+            <i class="iconfont icon-zhuanye"></i>
+            <label for="speciality">专业：</label>
+          </div>
+          <div class="el-form-input">
+            <input type="text" name="speciality" id="speciality" class="el-input-inner" v-model="speciality">
           </div>
         </div>
-        <div class="el-form-item">
-          <div class="el-form-content">
-            <div class="el-form-label">
-              <i class="iconfont icon-zhuanye"></i>
-              <label>专业 :</label>
-            </div>
-            <div class="el-form-text">
-              <div class="el-text-inner">信息与计算科学</div>
-            </div>
+      </div>
+      <div class="el-form-item">
+        <div class="el-form-content">
+          <div class="el-form-label">
+            <i class="iconfont icon-xingbie"></i>
+            <label for="sex">性别：</label>
+          </div>
+          <div class="el-form-input">
+            <input type="text" name="sex" id="sex" class="el-input-inner" v-model="request.sex">
           </div>
         </div>
-        <div class="el-form-item">
-          <div class="el-form-content">
-            <div class="el-form-label">
-              <i class="iconfont icon-xingbie"></i>
-              <label>性别 :</label>
-            </div>
-            <div class="el-form-text">
-              <div class="el-text-inner">女</div>
-            </div>
+      </div>
+      <div class="el-from-item">
+        <div class="el-form-content">
+          <div class="add-person">
+            <button type="button" class="el-button el-button-primary" @click="save">保存</button>
           </div>
         </div>
-        <div class="el-form-item">
-          <div class="el-form-content">
-            <div class="el-form-label">
-              <i class="iconfont icon-shengri1"></i>
-              <label>生日</label>
-            </div>
-            <div class="el-form-text">
-              <div class="el-text-inner">1998-04-06</div>
-            </div>
-          </div>
-        </div>      
       </div>
     </div>
   </div>
 </template>
 <script>
+import { SelectImg, UplodeImg } from "@/assets/js/index.js";
 export default {
-  name: "Person"
+  name: "Person",
+  data() {
+    return {
+      request:{
+        number:'',
+        colleague:'',
+        speciality:'',
+        sex:'',
+      }
+    };
+  },
+  created: function() {
+    var _self = this;
+  },
+  methods: {
+    SelectImg: function() {
+      SelectImg();
+    },
+    UplodeImg: function() {
+      UplodeImg();
+    },
+    save:function(){
+      
+    }
+  }
 };
 </script>
+<style>
+input[type="file"] {
+  height: 1px;
+  width: 1px;
+  opacity: 0;
+}
+.add-person {
+  margin: 0 auto;
+  text-align: center;
+}
+.upload-image {
+  text-align: center;
+}
+</style>
+
 
 

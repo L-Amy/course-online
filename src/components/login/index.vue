@@ -8,19 +8,19 @@
             <div class="el-form-input">
              <div class="identity-select">
                 <div class="mui-radio mui-left">
-                  <input type="radio" name="identity" id="student">
+                  <input type="radio" name="identity" id="student" value="1">
                   <label for="student">学生</label>
                 </div>
               </div>
               <div class="identity-select">
                 <div class="mui-radio mui-left">
-                  <input type="radio" name="identity" id="teacher">
+                  <input type="radio" name="identity" id="teacher" value="2">
                   <label for="teacher">教师</label>
                 </div>
               </div>
               <div class="identity-select">
                 <div class="mui-radio mui-left">
-                  <input type="radio" name="identity" id="manger">
+                  <input type="radio" name="identity" id="manger" value="3">
                   <label for="manger">管理员</label>
                 </div>
               </div>
@@ -34,7 +34,7 @@
               <label for="account">账号</label>
             </div>
             <div class="el-form-input">
-              <input type="text" id="account" name="account" class="el-input-inner" autofocus>
+              <input v-model="request.account" type="text" id="account" name="account" class="el-input-inner" autofocus>
             </div>
           </div>
         </div>
@@ -45,7 +45,7 @@
               <label for="password">密码</label>
             </div>
             <div class="el-form-input">
-              <input type="password" name="password" id="password" class="el-input-inner">
+              <input v-model="request.password" type="password" name="password" id="password" class="el-input-inner">
             </div>
           </div>
         </div>
@@ -61,7 +61,7 @@
         </div>
         <div class="el-form-item">
           <div class="el-form-button">
-            <button class="el-button el-button-primary">登陆</button>
+            <button class="el-button el-button-primary" @click="Login">登陆</button>
           </div>
         </div>
       </div>
@@ -71,7 +71,30 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name:'login',
+  data(){
+    return{
+      request:{
+        identity:'',
+        account:'',
+        passward:''
+      }
+    }
+  },
+  methods:{
+    Login(){
+      var _self=this;
+      var identity=$("input[name='identity']").val();
+      if(identity>0){
+        _self.request.identity=identity;
+        axios.post('/user',requesr).then(function(res){
+          if(res.data.success==1){}
+        })
+      }
+    }
+  }
+};
 </script>
 
 <style>

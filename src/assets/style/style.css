@@ -50,7 +50,9 @@ a{
 .mui-segmented-control.mui-segmented-control-inverted ~ .mui-slider-progress-bar{
   background-color: #009688 !important;
 }
-
+.mui-slider .mui-slider-group .mui-slider-item {
+  font-size: 12px;
+}
 /* 登陆 */
 .el-login-container{
     height: 80%;
@@ -133,8 +135,8 @@ a{
   border: solid 1px #009688;
 }
 .el-button-text-secondary{
-  color: rgb(255, 11, 11);
-  border: solid 1px rgb(255, 11, 11);
+  color: #ee8345;
+  border: solid 1px #ee8345;
 }
 .choose-modal {
   position: fixed;
@@ -210,40 +212,21 @@ a{
     padding: 10px 0px;
   }
 
-  .head-portrait {
-  height: 110px;
-  width: 100px;
-  margin: 10px;
-  float: right;
-}
-.head-portrait img{
-  width: 100%;
-  height: 100%;
-}
- .person-message{
-    height: calc(100vh - 120px);
-    background-color: #ffffff;
-    padding-top: 20px;
-}
-.person-message .el-form-label{
-  font-size: 13px;
-}
-
 /* 个人信息 */
 .head-portrait {
-    height: 100px;
-    width: 90px;
-    margin: 10px;
-    float: right;
+    height: 80px;
+    width: 80px;
+    margin: 5px auto;
+    border-radius: 50%;
+    background-color: #ece6e6;
   }
   .head-portrait img{
     width: 100%;
     height: 100%;
+    border-radius: 50%;
   }
    .person-message{
-      height: calc(100vh - 120px);
       background-color: #ffffff;
-      padding-top: 20px;
   }
   .person-message .el-form-label{
     font-size: 13px;

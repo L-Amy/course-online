@@ -17,13 +17,7 @@
                   <input type="radio" name="identity" id="teacher">
                   <label for="teacher">教师</label>
                 </div>
-              </div>
-              <div class="identity-select">
-                <div class="mui-radio mui-left">
-                  <input type="radio" name="identity" id="manger">
-                  <label for="manger">管理员</label>
-                </div>
-              </div>
+              </div>             
             </div>
           </div>
         </div>
@@ -80,7 +74,9 @@ export default {};
 <style>
 .identity-select{
   float: left;
-  margin-bottom: 20px
+    width: 50%;
+    margin: 20px auto;
+    padding-left: 30px;
 }
 .mui-radio.mui-left label {
     padding-right: 10px;
