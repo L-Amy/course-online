@@ -2,8 +2,16 @@ import fetch from '@/utils/fetch'
 
 export function register(data){
     return fetch({
-        url: '/create/account',
+        url: '/auth/register',
         method: 'POST',
+        data
+    })
+}
+
+export function login(data){
+    return fetch({
+        url:'/auth/login',
+        method:'POST',
         data
     })
 }

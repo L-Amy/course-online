@@ -25,7 +25,7 @@
           <div class="el-form-content">
             <div class="el-form-label">
               <i class="iconfont icon-yidongduanicon-"></i>
-              <label for="password">账号</label>
+              <label for="account">账号</label>
             </div>
             <div class="el-form-input">
               <input

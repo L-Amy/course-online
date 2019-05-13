@@ -30,9 +30,8 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/uncomputed',
       component: Home,
-      redirect: '/uncomputed',
       children: [
         {
           path: '/uncomputed',
@@ -64,7 +63,7 @@ export default new Router({
       ]
     },
     {
-      path: '/login',
+      path: '/',
       name: 'login',
       component: Login
     },

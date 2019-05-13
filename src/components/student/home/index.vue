@@ -6,7 +6,6 @@
         <span class="mui-icon mui-icon-left-nav el-left">返回</span>
       </button>
     </header>
-    <router-view/>
     <nav class="mui-bar mui-bar-tab">
       <a class="mui-tab-item mui-active" @click="switchBar(0)">
         <span class="mui-icon mui-icon-home"></span>
@@ -21,10 +20,10 @@
         <span class="mui-tab-label">我的</span>
       </a>
     </nav>
+    <router-view/>
   </div>
 </template>
 <script>
-
 export default {
   name: "Home",
   data() {

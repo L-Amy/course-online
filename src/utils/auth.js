@@ -7,11 +7,12 @@
 }*/
 // 获取用户信息
 export function getUserInfo(){
-    return window.localStorage.getItem('userInfo');
+    return JSON.parse(window.localStorage.getItem('userInfo'));
 }
 // 存储修改用户信息
 export function setUserInfo(data){
-    return window.localStorage.setItem('userInfo', data);
+    var user=JSON.stringify(data);
+    return window.localStorage.setItem('userInfo', user);
 }
 
 // delete userInfo || logout
