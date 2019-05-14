@@ -5,7 +5,7 @@ import {
 } from './auth'
 
 const service = axios.create({
-    timeout: 5000
+    timeout: 6000
 });
 
 //service.interceptors.request.use(config => {

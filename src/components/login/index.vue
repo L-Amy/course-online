@@ -85,6 +85,7 @@ export default {
   name: "login",
   data() {
     return {
+      Id: 0,
       type: "",
       account: "",
       password: "",
@@ -92,9 +93,10 @@ export default {
     };
   },
   created: function() {
-    var userInfo=getUserInfo();
-    if (userInfo!= null) {
-      this.type=userInfo.type;
+    var userInfo = getUserInfo();
+    if (userInfo != null) {
+      this.type = userInfo.type;
+      this.Id=userInfo.Id;
       this.jumpPage(1);
     }
   },
@@ -106,16 +108,18 @@ export default {
           account: this.account,
           password: this.password
         }).then(res => {
+          console.log(res);
           if (res.data.data == "1000" || res.data.data == "1001") {
             this.message = res.data.msg;
             AlertMessage(this.message);
           } else {
+            this.Id = res.data.data.Id;
             setUserInfo({
               type: this.type,
               account: this.account,
-              password: this.password
+              password: this.password,
+              Id:this.Id,
             });
-            console.log(this.type);
             this.jumpPage(res.data.data.isLogin);
           }
         });
@@ -124,7 +128,8 @@ export default {
     jumpPage(isLogin) {
       if (this.type == "2" && isLogin == 1) {
         this.$router.push({
-          path: "/uncomputed"
+          name: "studentHome",
+          params: { Id: this.Id }
         });
       } else if (this.type == "1" && isLogin == 1) {
         this.$router.push({

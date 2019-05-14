@@ -26,3 +26,10 @@ export function getClassList(data){
         data
     })
 }
+export function getCourseList(data){
+    return fetch({
+        url: '/common/getCourseList',
+        method: 'POST',
+        data
+    })
+}

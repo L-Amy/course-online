@@ -40,7 +40,7 @@ export function showReplayFrame(event) {
 
   //弹框
   export function AlertMessage(message){
-    mui.alert(message,'警告','确定',function(res){
+    mui.alert(message,'提示','确定',function(res){
       return;
     })
   }

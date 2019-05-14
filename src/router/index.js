@@ -31,6 +31,7 @@ export default new Router({
   routes: [
     {
       path: '/uncomputed',
+      name:'studentHome',
       component: Home,
       children: [
         {

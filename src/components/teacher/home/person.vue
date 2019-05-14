@@ -15,32 +15,107 @@
         <div class="el-form-content">
           <div class="el-form-label">
             <i class="iconfont icon-xingming"></i>
-            <label for="password">姓名：</label>
+            <label for="name">姓名：</label>
           </div>
           <div class="el-form-input">
-            <input type="password" name="password" id="password" class="el-input-inner">
+            <input type="text" name="name" id="name" class="el-input-inner" v-model="request.Name">
           </div>
         </div>
       </div>
       <div class="el-form-item">
         <div class="el-form-content">
           <div class="el-form-label">
-            <i class="iconfont icon-gonghao"></i>
-            <label for="password">工号：</label>
+            <i class="iconfont icon-xuehao"></i>
+            <label for="number">工号：</label>
           </div>
           <div class="el-form-input">
-            <input type="number" name="number" id="password" class="el-input-inner">
+            <input
+              type="number"
+              name="number"
+              id="number"
+              class="el-input-inner"
+              v-model="request.WorkNo"
+              readonly
+            >
           </div>
         </div>
       </div>
       <div class="el-form-item">
         <div class="el-form-content">
           <div class="el-form-label">
-            <i class="iconfont icon-yidongduanicon-"></i>
-            <label for="account">学院：</label>
+            <i class="iconfont icon-xueyuan"></i>
+            <label for="colleague">学院：</label>
           </div>
           <div class="el-form-input">
-            <input type="text" id="account" name="account" class="el-input-inner">
+            <select
+              name="colleague"
+              id="colleague"
+              v-model="request.ColleagueId"
+              class="el-input-inner"
+              @change="getSpecilityList"
+            >
+              <option v-for="item in colleagueList" :key="item.Id" :value="item.Id">{{item.Name}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="el-form-item">
+        <div class="el-form-content">
+          <div class="el-form-label">
+            <i class="iconfont icon-zhuanye"></i>
+            <label for="speciality">专业：</label>
+          </div>
+          <div class="el-form-input">
+            <select
+              name="speciality"
+              id="speciality"
+              v-model="request.SpecialityId"
+              class="el-input-inner"
+              @change="getGradeList"
+            >
+              <option
+                v-for="item in specialityList"
+                :key="item.Id"
+                :value="item.Id"
+              >{{item.SpecialityName}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="el-form-item">
+        <div class="el-form-content">
+          <div class="el-form-label">
+            <i class="iconfont icon-zhuanye"></i>
+            <label for="grade">年级：</label>
+          </div>
+          <div class="el-form-input">
+            <select
+              name="grade"
+              id="grade"
+              v-model="request.GradeId"
+              class="el-input-inner"
+              @change="getCourseList"
+            >
+              <option v-for="item in gradeList" :key="item.Id" :value="item.Id">{{item.Name}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="el-form-item">
+        <div class="el-form-content">
+          <div class="el-form-label">
+            <i class="iconfont icon-zhuanye"></i>
+            <label for="grade">所授课程：</label>
+          </div>
+          <div class="el-form-input">
+            <select
+              name="grade"
+              id="grade"
+              v-model="request.CourseId"
+              class="el-input-inner"
+            >
+              <option v-for="item in courseList" :key="item.Id" :value="item.Id">{{item.Name}}</option>
+            </select>
           </div>
         </div>
       </div>
@@ -48,17 +123,17 @@
         <div class="el-form-content">
           <div class="el-form-label">
             <i class="iconfont icon-xingbie"></i>
-            <label for="password">性别：</label>
+            <label for="sex">性别：</label>
           </div>
           <div class="el-form-input">
-            <input type="password" name="password" id="password" class="el-input-inner">
+            <input type="text" name="sex" id="sex" class="el-input-inner" v-model="request.Sex">
           </div>
         </div>
       </div>
-      <div class="el-from-item">
+      <div class="el-from-item" v-if="showUpdateBtn">
         <div class="el-form-content">
           <div class="add-person">
-            <button type="button" class="el-button el-button-primary">保存</button>
+            <button type="button" class="el-button el-button-primary" @click="updateMessage">保存</button>
           </div>
         </div>
       </div>
@@ -66,16 +141,159 @@
   </div>
 </template>
 <script>
-import { SelectImg, UplodeImg } from "@/assets/js/index.js";
+import { SelectImg, UplodeImg, AlertMessage } from "@/assets/js/index.js";
+import {
+  getColleagueList,
+  getSpecilityList,
+  getGradeList,
+  getClassList,
+  getCourseList
+} from "@/api/common/index";
+import { updateMessage, selectMessage } from "@/api/teacher/index";
+import { getUserInfo,setUserInfo } from "@/utils/auth";
 export default {
   name: "Person",
   data() {
-    return {};
+    return {
+      request: {
+        Id: 0,
+        Name: "",
+        WorkNo: "",
+        ColleagueId: 0,
+        SpecialityId: 0,
+        GradeId: 0,
+        CourseId:0,
+        Sex: ""
+      },
+      requestOrigin: {},
+      colleagueList: [],
+      specialityList: [],
+      gradeList: [],
+      ClassList: [],
+      courseList:[],
+      message: "",
+      showUpdateBtn: true
+    };
   },
   created: function() {
-    var _self = this;
+    var userInfo = getUserInfo();
+    this.request.Id = userInfo.Id;
+    this.request.WorkNo = userInfo.account;
+    this.getColleagueList();
   },
   methods: {
+    getColleagueList: function() {
+      getColleagueList().then(res => {
+        if (res.data.length > 0) {
+          this.colleagueList = res.data;
+          this.selectMessage(this.request);
+        }
+      });
+    },
+    getSpecilityList: function() {
+      if (this.request.ColleagueId > 0) {
+        getSpecilityList({ ColleagueId: this.request.ColleagueId }).then(
+          res => {
+            // console.log(res);
+            if (res.data.length > 0) {
+              this.specialityList = res.data;
+              this.request.SpecialityId = this.requestOrigin.SpecialityId;
+              this.getGradeList();
+            }
+          }
+        );
+      }
+    },
+    getGradeList: function() {
+      if (this.request.SpecialityId > 0) {
+        getGradeList({ SpecialityId: this.request.SpecialityId }).then(res => {
+          // console.log(res);
+          if (res.data.length > 0) {
+            this.gradeList = res.data;
+            this.request.GradeId = this.requestOrigin.GradeId;
+            this.getCourseList();
+          }
+        });
+      }
+    },
+    getCourseList:function(){
+      getCourseList(this.request).then(res=>{
+        if(res.data.length>0){
+          this.courseList=res.data;
+          this.request.CourseId=this.requestOrigin.CourseId;
+           this.request.Name = this.requestOrigin.Name;
+            this.request.Sex = this.requestOrigin.Sex;
+            if (
+              this.request.ColleagueId > 0 &&
+              this.request.SpecialityId > 0 &&
+              this.request.GradeId > 0 &&
+              this.request.CourseId>0 &&
+              this.request.Sex != "" &&
+              this.request.Name != ""
+            ) {
+              this.showUpdateBtn = false;
+              $("input[type='text']").attr("readonly",'true')
+              $('select').attr("disabled","true");
+            }
+        }
+      })
+    },
+    selectMessage: function() {
+      selectMessage(this.request).then(res => {
+        this.requestOrigin = res.data[0];
+        this.request.ColleagueId = this.requestOrigin.ColleagueId;
+        this.getSpecilityList();
+      });
+    },
+    updateMessage: function() {
+      if (this.checkInput()) {
+        console.log(this.request);
+        updateMessage(this.request).then(res => {
+          if (res.code == "1000") {
+            this.message = this.msg;
+            AlertMessage(this.message);
+          }else{
+            this.showUpdateBtn = false;
+              $("input[type='text']").attr("readonly",'true')
+              $('select').attr("disabled","true");
+              setUserInfo(this.request);
+          }
+        });
+      }
+    },
+    checkInput: function() {
+      if (this.request.Name == "") {
+        this.message = "姓名不能为空";
+        AlertMessage(this.message);
+        return false;
+      }
+      if (!this.request.ColleagueId > 0) {
+        this.message = "学院不能为空";
+        AlertMessage(this.message);
+        return false;
+      }
+      if (!this.request.SpecialityId > 0) {
+        this.message = "专业不能为空";
+        AlertMessage(this.message);
+        return false;
+      }
+      if (!this.request.GradeId > 0) {
+        this.message = "年级不能为空";
+        AlertMessage(this.message);
+        return false;
+      }
+      if (!this.request.CourseId > 0) {
+        this.message = "所授不能为空";
+        AlertMessage(this.message);
+        return false;
+      }
+      if (this.request.Sex == "") {
+        this.message = "性别不能为空";
+        AlertMessage(this.message);
+        return false;
+      }
+      return true;
+    },
     SelectImg: function() {
       SelectImg();
     },

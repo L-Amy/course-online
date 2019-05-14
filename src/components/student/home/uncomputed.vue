@@ -27,6 +27,9 @@ export default {
         { id: 11, name: "请描述vue的双向绑定原理?" }
       ]
     };
+  },
+  created:function(){
+    console.log(this.$route.params);
   }
 };
 </script>
