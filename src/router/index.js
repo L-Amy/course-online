@@ -85,6 +85,7 @@ export default new Router({
         },
         {
           path: '/publishTask',
+          name:'publishTask',
           component: PublishTask
         },
         {

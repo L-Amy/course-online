@@ -144,7 +144,7 @@ import {
   getClassList
 } from "@/api/common/index";
 import { updateMessage, selectMessage } from "@/api/student/index";
-import { getUserInfo } from "@/utils/auth";
+import { getUserInfo,setUserInfo } from "@/utils/auth";
 export default {
   name: "Person",
   data() {
@@ -173,8 +173,6 @@ export default {
     this.request.Id = userInfo.Id;
     this.request.StudentNo = userInfo.account;
     this.getColleagueList();
-    console.log(this.request);
-    console.log(this.request.ColleagueId);
   },
   methods: {
     getColleagueList: function() {
@@ -218,22 +216,38 @@ export default {
           if (res.data.length > 0) {
             this.ClassList = res.data;
             this.request.ClassId = this.requestOrigin.ClassId;
-            this.request.Name = this.requestOrigin.Name;
-            this.request.Sex = this.requestOrigin.Sex;
-            if (
-              this.request.ColleagueId > 0 &&
-              this.request.SpecialityId > 0 &&
-              this.request.GradeId > 0 &&
-              this.request.ClassId > 0 &&
-              this.request.Sex != "" &&
-              this.request.Name != ""
-            ) {
-              this.showUpdateBtn = false;
-              $("input[type='text']").attr("readonly",'true')
-              $('select').attr("disabled","true");
+            console.log(this.requestOrigin);
+            if (this.requestOrigin.Name != null) {
+              this.request.Name = this.requestOrigin.Name;
+            }
+            if (this.requestOrigin.Sex != null) {
+              this.request.Sex = this.requestOrigin.Sex;
+              this.messageDetail();
             }
           }
         });
+      }
+    },
+    messageDetail: function() {
+      if (
+        this.request.ColleagueId > 0 &&
+        this.request.SpecialityId > 0 &&
+        this.request.GradeId > 0 &&
+        this.request.ClassId > 0 &&
+        !(
+          this.request.Sex == "" ||
+          this.request.Sex == null ||
+          this.request.Sex == undefined
+        ) &&
+        !(
+          this.request.Name == "" ||
+          this.request.Name == null ||
+          this.request.Name == undefined
+        )
+      ) {
+        this.showUpdateBtn = false;
+        $("input[type='text']").attr("readonly", "true");
+        $("select").attr("disabled", "true");
       }
     },
     selectMessage: function() {
@@ -245,17 +259,22 @@ export default {
     },
     updateMessage: function() {
       if (this.checkInput()) {
-        console.log(this.request);
         updateMessage(this.request).then(res => {
-          if (res.code == "1000") {
-            this.message = this.msg;
-            AlertMessage(this.message);
+          if (res.data.code == "1001") {
+            this.messageDetail();
           }
+          this.message = res.data.msg;
+          AlertMessage(this.message)
+
         });
       }
     },
     checkInput: function() {
-      if (this.request.Name == "") {
+      if (
+        this.request.Name == "" ||
+        this.request.Name == null ||
+        this.request.Name == undefined
+      ) {
         this.message = "姓名不能为空";
         AlertMessage(this.message);
         return false;
@@ -280,7 +299,11 @@ export default {
         AlertMessage(this.message);
         return false;
       }
-      if (this.request.Sex == "") {
+      if (
+        this.request.Sex == "" ||
+        this.request.Sex == null ||
+        this.request.Sex == undefined
+      ) {
         this.message = "性别不能为空";
         AlertMessage(this.message);
         return false;
@@ -309,15 +332,6 @@ input[type="file"] {
 .upload-image {
   text-align: center;
 }
-/* .el-form-label{
-  width: 20%;
-  display: block;
-  float: left;
-}
-.el-form-input{
-  width:80%;
-  float: left;
-} */
 </style>
 
 

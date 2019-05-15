@@ -108,9 +108,11 @@ export default {
           password: this.password,
           type: this.type
         }).then(res => {
-          console.log(res);
           this.message = res.data.msg;
           AlertMessage(this.message);
+          this.$router.push({
+            path:'/',
+          })
         });
       }
     },

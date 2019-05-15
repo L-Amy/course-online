@@ -108,12 +108,7 @@
             <label for="grade">所授课程：</label>
           </div>
           <div class="el-form-input">
-            <select
-              name="grade"
-              id="grade"
-              v-model="request.CourseId"
-              class="el-input-inner"
-            >
+            <select name="grade" id="grade" v-model="request.CourseId" class="el-input-inner">
               <option v-for="item in courseList" :key="item.Id" :value="item.Id">{{item.Name}}</option>
             </select>
           </div>
@@ -150,7 +145,7 @@ import {
   getCourseList
 } from "@/api/common/index";
 import { updateMessage, selectMessage } from "@/api/teacher/index";
-import { getUserInfo,setUserInfo } from "@/utils/auth";
+import { getUserInfo, setUserInfo } from "@/utils/auth";
 export default {
   name: "Person",
   data() {
@@ -162,7 +157,7 @@ export default {
         ColleagueId: 0,
         SpecialityId: 0,
         GradeId: 0,
-        CourseId:0,
+        CourseId: 0,
         Sex: ""
       },
       requestOrigin: {},
@@ -170,7 +165,7 @@ export default {
       specialityList: [],
       gradeList: [],
       ClassList: [],
-      courseList:[],
+      courseList: [],
       message: "",
       showUpdateBtn: true
     };
@@ -211,32 +206,51 @@ export default {
           if (res.data.length > 0) {
             this.gradeList = res.data;
             this.request.GradeId = this.requestOrigin.GradeId;
-            this.getCourseList();
+            if (this.request.GradeId > 0) {
+              this.getCourseList();
+            }
           }
         });
       }
     },
-    getCourseList:function(){
-      getCourseList(this.request).then(res=>{
-        if(res.data.length>0){
-          this.courseList=res.data;
-          this.request.CourseId=this.requestOrigin.CourseId;
-           this.request.Name = this.requestOrigin.Name;
-            this.request.Sex = this.requestOrigin.Sex;
-            if (
-              this.request.ColleagueId > 0 &&
-              this.request.SpecialityId > 0 &&
-              this.request.GradeId > 0 &&
-              this.request.CourseId>0 &&
-              this.request.Sex != "" &&
-              this.request.Name != ""
-            ) {
-              this.showUpdateBtn = false;
-              $("input[type='text']").attr("readonly",'true')
-              $('select').attr("disabled","true");
+    getCourseList: function() {
+      if (this.request.GradeId > 0) {
+        getCourseList({ GradeId: this.request.GradeId }).then(res => {
+          if (res.data.length > 0) {
+            this.courseList = res.data;
+            this.request.CourseId = this.requestOrigin.CourseId;
+            if (this.requestOrigin.Name != null) {
+              this.request.Name = this.requestOrigin.Name;
             }
-        }
-      })
+            if (this.requestOrigin.Sex != null) {
+              this.request.Sex = this.requestOrigin.Sex;
+              this.messageDetail();
+            }
+          }
+        });
+      }
+    },
+    messageDetail: function() {
+      if (
+        this.request.ColleagueId > 0 &&
+        this.request.SpecialityId > 0 &&
+        this.request.GradeId > 0 &&
+        this.request.CourseId > 0 &&
+        !(
+          this.request.Sex == "" ||
+          this.request.Sex == null ||
+          this.request.Sex == undefined
+        ) &&
+        !(
+          this.request.Name == "" ||
+          this.request.Name == null ||
+          this.request.Name == undefined
+        )
+      ) {
+        this.showUpdateBtn = false;
+        $("input[type='text']").attr("readonly", "true");
+        $("select").attr("disabled", "true");
+      }
     },
     selectMessage: function() {
       selectMessage(this.request).then(res => {
@@ -249,20 +263,20 @@ export default {
       if (this.checkInput()) {
         console.log(this.request);
         updateMessage(this.request).then(res => {
-          if (res.code == "1000") {
-            this.message = this.msg;
-            AlertMessage(this.message);
-          }else{
-            this.showUpdateBtn = false;
-              $("input[type='text']").attr("readonly",'true')
-              $('select').attr("disabled","true");
-              setUserInfo(this.request);
+          if (res.data.code == "1001") {
+            this.messageDetail();
           }
+          this.message = res.data.msg;
+          AlertMessage(this.message);
         });
       }
     },
     checkInput: function() {
-      if (this.request.Name == "") {
+      if (
+        this.request.Name == "" ||
+        this.request.Name == null ||
+        this.request.Name == undefined
+      ) {
         this.message = "姓名不能为空";
         AlertMessage(this.message);
         return false;
@@ -287,7 +301,11 @@ export default {
         AlertMessage(this.message);
         return false;
       }
-      if (this.request.Sex == "") {
+      if (
+        this.request.Sex == "" ||
+        this.request.Sex == null ||
+        this.request.Sex == undefined
+      ) {
         this.message = "性别不能为空";
         AlertMessage(this.message);
         return false;

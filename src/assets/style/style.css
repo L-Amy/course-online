@@ -140,11 +140,11 @@ a{
 }
 .choose-modal {
   position: fixed;
-  bottom: 70px;
-  right: 10px;
-  height: 50px;
-  width: 50px;
-  line-height: 50px;
+  top: 44px;
+  left: calc(50% - 18px);
+  height: 25px;
+  width: 35px;
+  line-height: 25px;
   text-align: center;
   border-radius: 50%;
   background-color: rgb(252, 110, 8);

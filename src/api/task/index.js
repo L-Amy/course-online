@@ -14,3 +14,25 @@ export function getTaskList(data){
         data
     })
 }
+
+export function getTask(data){
+    return fetch({
+        url:'/task/getTask',
+        method:'POST',
+        data
+    })
+}
+export function deleteTask(data){
+    return fetch({
+        url:'/task/deleteTask',
+        method:'POST',
+        data
+    })
+}
+export function updateTask(data){
+    return fetch({
+        url:'/task/updateTask',
+        method:'POST',
+        data
+    })
+}

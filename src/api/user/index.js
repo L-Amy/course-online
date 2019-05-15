@@ -15,3 +15,11 @@ export function login(data){
         data
     })
 }
+
+export function logout(data){
+    return fetch({
+        url:'/auth/logout',
+        method:'POST',
+        data
+    })
+}

@@ -1,21 +1,35 @@
 <template>
   <div class="mui-content">
     <div class="publish-task">
-      <div class="publish-title">
+      <div class="publish-title" v-if="submitBtn">
         <i class="iconfont icon-fabu"></i>发布任务
+      </div>
+      <div class="publish-title" v-if="updateBtn">
+        <i class="iconfont icon-fabu"></i>更新任务
       </div>
       <div class="edit-frame">
         <textarea name id cols="30" rows="20" v-model="request.Content"></textarea>
       </div>
       <div class="publish-button">
-        <button type="button" class="el-button el-button-primary" @click="submit">发布</button>
+        <button
+          type="button"
+          class="el-button el-button-primary"
+          @click="submit"
+          v-if="submitBtn"
+        >发布</button>
+        <button
+          type="button"
+          class="el-button el-button-primary"
+          @click="update"
+          v-if="updateBtn"
+        >更新</button>
       </div>
     </div>
   </div>
 </template>
 <script>
 import { getClassList } from "@/api/common/index";
-import { publishTask } from "@/api/task/index";
+import { publishTask, updateTask } from "@/api/task/index";
 import { selectMessage } from "@/api/teacher/index";
 import { getUserInfo } from "@/utils/auth";
 import { AlertMessage } from "@/assets/js/index";
@@ -24,13 +38,19 @@ export default {
   data() {
     return {
       request: {
+        TaskId: 0,
         ClassId: 0,
         TeacherId: 0,
         Content: "",
         CourseId: 0,
         Name: ""
       },
+      data:{
+        TaskId:0,
+      },
       classList: [],
+      submitBtn: true,
+      updateBtn: false,
       message: ""
     };
   },
@@ -48,11 +68,17 @@ export default {
           getClassList({ GradeId: this.request.GradeId }).then(res => {
             this.classList = res.data;
           });
-        }else{
-            this.message="请先完善你的个人信息";
-            AlertMessage(this.message);
+        } else {
+          this.message = "请先完善你的个人信息";
+          AlertMessage(this.message);
         }
       });
+    }
+    if (this.$route.params.Id > 0) {
+      this.submitBtn = false;
+      this.updateBtn = true;
+      console.log(this.$route.params.Id )
+      this.data.TaskId = this.$route.params.Id;
     }
   },
   methods: {
@@ -64,11 +90,38 @@ export default {
         }
       }
     },
+    update() {
+      if (this.request.Id > 0) {
+        if (this.checkInput()) {
+          console.log(this.request)
+          updateTask({TaskId:this.data.TaskId,Content:this.request.Content}).then(res => {
+            if ((res.data.code = "1001")) {
+              AlertMessage(res.data.msg);
+              this.$router.push({
+                path: "/taskList"
+              });
+            }
+          });
+        }
+      }
+    },
     publishTask() {
-      publishTask(this.request).then(res => {
-        this.message = res.data.msg;
-        AlertMessage(this.message);
-      });
+      if (this.checkInput()) {
+        publishTask(this.request).then(res => {
+          this.message = res.data.msg;
+          AlertMessage(this.message);
+          this.$router.push({
+            path: "/taskList"
+          });
+        });
+      }
+    },
+    checkInput() {
+      if (this.request.Content == "" || this.request.Content == undefined) {
+        AlertMessage("发布内容不能为空！");
+        return false;
+      }
+      return true;
     }
   }
 };

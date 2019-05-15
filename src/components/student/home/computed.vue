@@ -39,19 +39,7 @@ export default {
   name: "computed",
   data() {
     return {
-      taskList: [
-        { id: 1, name: "请描述vue的双向绑定原理?" },
-        { id: 2, name: "请描述vue的双向绑定原理?" },
-        { id: 3, name: "请描述vue的双向绑定原理?" },
-        { id: 4, name: "请描述vue的双向绑定原理?" },
-        { id: 5, name: "请描述vue的双向绑定原理?" },
-        { id: 6, name: "请描述vue的双向绑定原理?" },
-        { id: 7, name: "请描述vue的双向绑定原理?" },
-        { id: 8, name: "请描述vue的双向绑定原理?" },
-        { id: 9, name: "请描述vue的双向绑定原理?" },
-        { id: 10, name: "请描述vue的双向绑定原理?" },
-        { id: 11, name: "请描述vue的双向绑定原理?" }
-      ]
+      taskList: [],
     };
   },
   created:function(){

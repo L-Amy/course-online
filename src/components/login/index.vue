@@ -128,8 +128,7 @@ export default {
     jumpPage(isLogin) {
       if (this.type == "2" && isLogin == 1) {
         this.$router.push({
-          name: "studentHome",
-          params: { Id: this.Id }
+          path:'/uncomputed'
         });
       } else if (this.type == "1" && isLogin == 1) {
         this.$router.push({
