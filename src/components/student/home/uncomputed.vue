@@ -3,13 +3,12 @@
     <div class="uncomputed-icon-header"></div>
     <div class="el-container">
       <div class="el-group">
-        <router-link to="/uncomputedEdit">
-          <div
-            class="el-group-item"
-            v-for="(item,index) in taskList"
-            v-bind:key="item.Id"
-          >{{index+1}}. {{item.Content}}</div>
-        </router-link>
+        <div
+          @click="answerTask(item.Id)"
+          class="el-group-item"
+          v-for="(item,index) in taskList"
+          v-bind:key="item.Id"
+        >{{index+1}}. {{item.Content}}</div>
       </div>
     </div>
     <div class="choose-modal" id="openPopover" @click="TogglePopover">
@@ -74,6 +73,12 @@ export default {
         });
       }
     },
+    answerTask(Id){
+      this.$router.push({
+        name:'UncomputedEdit',
+        params:{Id:Id},
+      })
+    },
     getTask() {
       getTask(this.request).then(res => {
         this.taskList = res.data;
@@ -91,7 +96,6 @@ export default {
 .uncomputed-icon-header {
   color: #ffffff;
   text-align: center;
-  height: 30px;
   line-height: 30px;
   font-weight: bolder;
 }

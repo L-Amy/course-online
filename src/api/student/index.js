@@ -14,3 +14,10 @@ export function selectMessage(data){
         data
     })
 }
+export function getStudentList(data){
+    return fetch({
+        url:'/student/getStudentList',
+        method:'POST',
+        data
+    })
+}

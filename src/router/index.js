@@ -57,7 +57,7 @@ export default new Router({
           component: TaskDetail,
         },
         {
-          path:'/markDetail',
+          path:'/markDetail/:Id',
           name:'markDetail',
           component:MarkDetail,
         }
@@ -105,7 +105,8 @@ export default new Router({
           name:'answerQuestion',
           component:AnswerQuestion,
         },{
-          path:'/markList',
+          path:'/markList/:Id',
+          name:'markList',
           component:MarkList,
         }
       ]

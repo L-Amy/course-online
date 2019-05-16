@@ -36,3 +36,24 @@ export function updateTask(data){
         data
     })
 }
+export function answerTask(data){
+    return fetch({
+        url:'/task/answerTask',
+        method:'POST',
+        data
+    })
+}
+export function markTask(data){
+    return fetch({
+        url:'/task/markTask',
+        method:'POST',
+        data
+    })
+}
+export function TaskDetail(data){
+    return fetch({
+        url:'/task/TaskDetail',
+        method:'POST',
+        data
+    })
+}

@@ -79,7 +79,10 @@ export default {
 .task-message {
   display: inline-block;
   height: 100%;
-  width: 60%;
+  width: 60% !important;
+}
+.el-group-item a {
+  display: inline;
 }
 </style>
 

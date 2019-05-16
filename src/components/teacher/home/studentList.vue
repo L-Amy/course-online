@@ -2,33 +2,33 @@
   <div class="mui-content">
     <div class="student-list">
       <div class="el-group">
-        <div class="el-group-item" v-for="item in studentList" v-bind:key="item.id">
+        <div class="el-group-item" v-for="item in studentList" v-bind:key="item.Id" @click="Detail(item.Id)">
           <router-link to="/markList">
-          <div class="student-header">
-            <div class="header-portrait">
-              <img src="@/assets/img/studentImg.jpg" alt>
+            <div class="student-header">
+              <div class="header-portrait">
+                <img src="@/assets/img/studentImg.jpg" alt>
+              </div>
             </div>
-          </div>
-          <div class="student-number">
-            <div>{{item.name}}</div>
-            <div>{{item.Number}}</div>
-          </div>
-          <div class="task-rate">
-            <div class="computed-rate">
-              <span>完成</span>
-              <span class="computed-icon">
-                <i class="iconfont icon-icon-1"></i>
-              </span>
-              <span>{{item.computedNum}}</span>
+            <div class="student-number">
+              <div>{{item.Name}}</div>
+              <div>{{item.StudentNo}}</div>
             </div>
-            <div class="uncomputed-rate">
-              <span>未完成</span>
-              <span class="uncomputed-icon">
-                <i class="iconfont icon-icon-1"></i>
-              </span>
-              <span>{{item.umcomputedNum}}</span>
+            <div class="task-rate">
+              <div class="computed-rate">
+                <span>完成</span>
+                <span class="computed-icon">
+                  <i class="iconfont icon-icon-1"></i>
+                </span>
+                <span>{{item.comCount}}</span>
+              </div>
+              <div class="uncomputed-rate">
+                <span>未完成</span>
+                <span class="uncomputed-icon">
+                  <i class="iconfont icon-icon-1"></i>
+                </span>
+                <span>{{item.uncomCount}}</span>
+              </div>
             </div>
-          </div>
           </router-link>
         </div>
       </div>
@@ -38,100 +38,52 @@
     </div>
     <div id="popover" class="mui-popover">
       <ul class="mui-table-view">
-        <li class="mui-table-view-cell">
-          <a href="#"><i class="iconfont icon-myclass"></i> 一班</a>
-        </li>
-        <li class="mui-table-view-cell">
-          <a href="#"><i class="iconfont icon-myclass"></i> 二班</a>
-        </li>
-        <li class="mui-table-view-cell">
-          <a href="#"><i class="iconfont icon-myclass"></i> 三班</a>
-        </li>
-        <li class="mui-table-view-cell">
-          <a href="#"><i class="iconfont icon-myclass"></i> 四班</a>
+        <li
+          class="mui-table-view-cell"
+          v-for="item in ClassList"
+          :key="item.Id"
+          @click="getStudentList(item.Id)"
+        >
+          <a>
+            <i class="iconfont icon-myclass"></i>
+            {{item.Name}}
+          </a>
         </li>
       </ul>
     </div>
   </div>
 </template>
 <script>
+import { getClassList } from "@/api/common/index";
+import { getStudentList } from "@/api/student/index";
+import { selectMessage } from "@/api/teacher/index";
+import { getUserInfo } from "@/utils/auth";
 export default {
   name: "studentList",
   data() {
     return {
-      studentList: [
-        {
-          id: 1,
-          name: "安继兰",
-          Number: "152245098876",
-          computedNum: 2,
-          umcomputedNum: 3
-        },
-        {
-          id: 2,
-          name: "安继兰",
-          Number: "152245098876",
-          computedNum: 2,
-          umcomputedNum: 3
-        },
-        {
-          id: 3,
-          name: "安继兰",
-          Number: "152245098876",
-          computedNum: 2,
-          umcomputedNum: 3
-        },
-        {
-          id: 4,
-          name: "安继兰",
-          Number: "152245098876",
-          computedNum: 2,
-          umcomputedNum: 3
-        },
-        {
-          id: 5,
-          name: "安继兰",
-          Number: "152245098876",
-          computedNum: 2,
-          umcomputedNum: 3
-        },
-        {
-          id: 6,
-          name: "安继兰",
-          Number: "152245098876",
-          computedNum: 2,
-          umcomputedNum: 3
-        },
-        {
-          id: 7,
-          name: "安继兰",
-          Number: "152245098876",
-          computedNum: 2,
-          umcomputedNum: 3
-        },
-        {
-          id: 8,
-          name: "安继兰",
-          Number: "152245098876",
-          computedNum: 2,
-          umcomputedNum: 3
-        },
-        {
-          id: 9,
-          name: "安继兰",
-          Number: "152245098876",
-          computedNum: 2,
-          umcomputedNum: 3
-        },
-        {
-          id: 10,
-          name: "安继兰",
-          Number: "152245098876",
-          computedNum: 2,
-          umcomputedNum: 3
-        }
-      ]
+      request: {
+        teacherId: 0,
+        GradeId: 0,
+        classId: 0
+      },
+      ClassList: [],
+      studentList: []
     };
+  },
+  created: function() {
+    var user = getUserInfo();
+    if (user.Id > 0) {
+      this.request.teacherId = user.Id;
+      selectMessage({ Id: this.request.teacherId }).then(res => {
+        this.request.GradeId = res.data[0].GradeId;
+        getClassList({ GradeId: this.request.GradeId }).then(res => {
+          this.ClassList = res.data;
+          this.request.classId = this.ClassList[0].Id;
+          this.getStudentList();
+        });
+      });
+    }
   },
   methods: {
     TogglePopover: function() {
@@ -139,6 +91,27 @@ export default {
         "toggle",
         document.getElementById("openPopover")
       );
+    },
+    getStudentList: function(classId) {
+      if (classId > 0) {
+        this.request.classId = classId;
+        this.TogglePopover();
+      }
+      console.log(this.request.classId);
+      getStudentList({
+        classId: this.request.classId,
+        teacherId: this.request.teacherId
+      }).then(res => {
+        this.studentList = res.data;
+      });
+    },
+    Detail:function(studentId){
+      if(studentId>0){
+        this.$router.push({
+        name:'markList',
+        params:{Id:studentId},
+      })
+      }
     }
   }
 };
