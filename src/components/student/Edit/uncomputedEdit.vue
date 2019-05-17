@@ -2,14 +2,14 @@
   <div class="mui-content">
     <div class="task-title">
       <span>题目：</span>
-      <span>请描述vue的数据双向绑定原理？</span>
+      <span>{{this.$route.params.Content}}</span>
     </div>
     <div class="edit-frame">
       <textarea name="editTask" id cols="30" rows="20" v-model="request.AnswerContent"></textarea>
     </div>
     <div class="edit-frame"></div>
     <div class="edit-button">
-      <button type="button" class="el-button el-button-primary">向老师提问</button>
+      <button type="button" class="el-button el-button-primary" @click="askTask">向老师提问</button>
     </div>
     <div class="edit-button">
       <button type="button" class="el-button el-button-secondary" @click="answerTask">提交</button>
@@ -21,6 +21,8 @@
 import { getUserInfo } from "@/utils/auth";
 import { answerTask } from "@/api/task/index";
 import {AlertMessage} from "@/assets/js/index";
+import {askTask} from "@/api/task/index"
+
 export default {
   name: "UncomputedEdit",
   data() {
@@ -51,6 +53,15 @@ export default {
             AlertMessage('回答失败')
         }
       });
+    },
+    askTask(){
+      this.request.TeacherId=this.$route.params.TeacherId;
+      console.log(this.request)
+      askTask(this.request).then(res=>{
+        if(res.data.code=='1000'){
+          AlertMessage(res.data.msg);
+        }
+      })
     }
   }
 };

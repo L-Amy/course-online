@@ -17,6 +17,10 @@
         <span class="mui-tab-label">已完成</span>
       </a>
       <a class="mui-tab-item" @click="switchBar(2)">
+        <span class="mui-icon mui-icon-chat"></span>
+        <span class="mui-tab-label">提问列表</span>
+      </a>
+      <a class="mui-tab-item" @click="switchBar(3)">
         <span class="mui-icon mui-icon-contact"></span>
         <span class="mui-tab-label">我的</span>
       </a>
@@ -60,7 +64,12 @@ export default {
             path: "/computed"
           });
           break;
-        case 2:
+          case 2:
+          this.$router.push({
+            path:'/myAskList'
+          });
+          break;
+        case 3:
           this.$router.push({
             path: "/person"
           });

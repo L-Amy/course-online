@@ -5,14 +5,16 @@ import Register from '@/components/register/index'
 import Login from '@/components/login/index'
 import Uncomputed from '@/components/student/home/uncomputed'
 import Computed from '@/components/student/home/computed'
+import MyAskList from "@/components/student/home/askList"
 import Person from '@/components/student/home/person'
 import UncomputedEdit from '@/components/student/Edit/uncomputedEdit'
-import TaskDetail from "@/components/student/Detail/taskDetail"
+import AskDetail from "@/components/student/ask/index"
 import MarkDetail from "@/components/student/marked/index"
 
 import TeacherHome from '@/components/teacher/home/index'
 import TaskList from '@/components/teacher/home/taskList'
 import PublishTask from '@/components/teacher/home/publishTask'
+import AskList from "@/components/teacher/home/askList"
 import StudentList from '@/components/teacher/home/studentList'
 import TeacherMessage from '@/components/teacher/home/person'
 import AnswerQuestion from '@/components/teacher/markTask/index'
@@ -43,18 +45,22 @@ export default new Router({
           component: Computed
         },
         {
+          path:'/myAskList',
+          component:MyAskList
+        },
+        {
           path: '/person',
           component: Person,
         },
         {
-          path: '/uncomputedEdit',
+          path: '/uncomputedEdit/:Id/:Content/:TeacherId',
           name: 'UncomputedEdit',
           component: UncomputedEdit
         },
         {
-          path: '/taskDetail',
-          name: 'taskDetail',
-          component: TaskDetail,
+          path: '/askDetail',
+          name: 'askDetail',
+          component: AskDetail,
         },
         {
           path:'/markDetail/:Id',
@@ -87,6 +93,10 @@ export default new Router({
           path: '/publishTask',
           name:'publishTask',
           component: PublishTask
+        },
+        {
+          path:'/askList',
+          component:AskList
         },
         {
           path: '/studentList',

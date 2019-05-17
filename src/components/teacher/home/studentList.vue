@@ -3,7 +3,6 @@
     <div class="student-list">
       <div class="el-group">
         <div class="el-group-item" v-for="item in studentList" v-bind:key="item.Id" @click="Detail(item.Id)">
-          <router-link to="/markList">
             <div class="student-header">
               <div class="header-portrait">
                 <img src="@/assets/img/studentImg.jpg" alt>
@@ -29,7 +28,6 @@
                 <span>{{item.uncomCount}}</span>
               </div>
             </div>
-          </router-link>
         </div>
       </div>
     </div>

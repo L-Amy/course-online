@@ -57,3 +57,31 @@ export function TaskDetail(data){
         data
     })
 }
+export function askTask(data){
+    return fetch({
+        url:'/task/askTask',
+        method:'POST',
+        data
+    })
+}
+export function getAskList(data){
+    return fetch({
+        url:'/task/getAskList',
+        method:'POST',
+        data
+    })
+}
+export function getAskDetail(data){
+    return fetch({
+        url:'/task/getAskDetail',
+        method:'POST',
+        data
+    })
+}
+export function answerAsk(data){
+    return fetch({
+        url:'/task/answerAsk',
+        method:'POST',
+        data
+    })
+}

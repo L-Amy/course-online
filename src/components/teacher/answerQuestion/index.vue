@@ -2,18 +2,21 @@
     <div class="mui-content">
         <div class="task-title">
             <span>题目：</span>
-            <span>{{this.$route.query.Content}}</span>
+            <span v-if="markBtn">{{this.$route.query.Content}}</span>
+            <span v-if="answerBtn">{{this.$route.query.answerContent}}</span>
                     </div>
             <div class="edit-frame">
-                <textarea name="editTask" id="" cols="30" rows="20" v-model="request.markContent"></textarea>
+                <textarea name="editTask" id="" cols="30" rows="20" v-model="request.markContent" v-if="markBtn"></textarea>
+                 <textarea name="editTask" id="" cols="30" rows="20" v-model="answerReq.TeaReContent" v-if="answerBtn"></textarea>
             </div>
         <div class="edit-frame"></div>
-        <div class="edit-button"><button type="button" class="el-button el-button-secondary " @click="markTask">提交</button></div>
+        <div class="edit-button"><button type="button" class="el-button el-button-secondary " v-if="markBtn" @click="markTask">提交</button></div>
+        <div class="edit-button"><button type="button" class="el-button el-button-secondary " v-if="answerBtn" @click="answerAsk">答疑</button></div>
         <div></div>
     </div>
 </template>
 <script>
-import {markTask} from "@/api/task/index";
+import {markTask,answerAsk} from "@/api/task/index";
 import {AlertMessage} from "@/assets/js/index"
 export default {
     name:'markTask',
@@ -22,11 +25,24 @@ export default {
             request:{
                 markContent:'',
                 Id:0,//任务Id
+            },
+            markBtn:true,
+            answerBtn:false,
+            answerReq:{
+                Id:0,
+                TeaReContent:'',
+
             }
         }
     },
     created:function(){
         var Id=this.$route.query.Id;
+        var taskId=this.$route.query.TaskId;
+        if(taskId>0){
+            this.markBtn=false;
+            this.answerBtn=true;
+            this.answerReq.Id=taskId;
+        }
         console.log(this.$route.query.Id)
         if(Id>0){
             this.request.Id=Id;
@@ -37,8 +53,15 @@ export default {
             markTask(this.request).then(res=>{
                 if(res.data.code=='1001'){
                     AlertMessage(res.data.msg);
+                    location.reload();
                 }
             })
+        },
+        answerAsk(){
+            console.log(this.answerReq)
+           answerAsk(this.answerReq).then(res=>{
+                   AlertMessage(res.data.msg);
+           }) 
         }
     }
 }

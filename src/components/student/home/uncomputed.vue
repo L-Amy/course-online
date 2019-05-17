@@ -4,7 +4,7 @@
     <div class="el-container">
       <div class="el-group">
         <div
-          @click="answerTask(item.Id)"
+          @click="answerTask(item.Id,item.Content,item.TeacherId)"
           class="el-group-item"
           v-for="(item,index) in taskList"
           v-bind:key="item.Id"
@@ -73,10 +73,10 @@ export default {
         });
       }
     },
-    answerTask(Id){
+    answerTask(Id,content,TeacherId){
       this.$router.push({
         name:'UncomputedEdit',
-        params:{Id:Id},
+        params:{Id:Id,Content:content,TeacherId:TeacherId},
       })
     },
     getTask() {
