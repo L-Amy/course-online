@@ -5,7 +5,7 @@
         <div class="el-group-item" v-for="item in studentList" v-bind:key="item.Id" @click="Detail(item.Id)">
             <div class="student-header">
               <div class="header-portrait">
-                <img src="@/assets/img/studentImg.jpg" alt>
+                <img :src="item.ImgLocation" alt>
               </div>
             </div>
             <div class="student-number">

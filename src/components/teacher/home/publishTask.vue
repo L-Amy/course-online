@@ -138,8 +138,7 @@ export default {
   font-size: 15px;
 }
 .edit-frame textarea {
-  border: none;
-  background: none;
+  background-color: #ffff;
 }
 </style>
 

@@ -1,14 +1,16 @@
 <template>
   <div class="mui-content">
     <div class="head-portrait">
-      <img src id="imgShow" style="display:none">
+      <img :src="avatarSrc" id="imgShow" v-show="avatarSrc">
       <input
         type="file"
         id="imgLocal"
+        name="img"
         accept="image/png, image/jpeg, image/gif, image/jpg"
-        @change="UplodeImg"
+        @change="UplodeImg($event)"
+        ref="avatarInput"
       >
-      <div class="upload-image" @click="SelectImg">上传图片</div>
+      <div class="upload-image" @click="SelectImg($event)">上传图片</div>
     </div>
     <div class="el-form">
       <div class="el-form-item">
@@ -85,7 +87,7 @@
       <div class="el-form-item">
         <div class="el-form-content">
           <div class="el-form-label">
-            <i class="iconfont icon-zhuanye"></i>
+            <i class="iconfont icon-paperplane-fill"></i>
             <label for="grade">年级：</label>
           </div>
           <div class="el-form-input">
@@ -104,7 +106,7 @@
       <div class="el-form-item">
         <div class="el-form-content">
           <div class="el-form-label">
-            <i class="iconfont icon-zhuanye"></i>
+            <i class="iconfont icon-listpress"></i>
             <label for="grade">所授课程：</label>
           </div>
           <div class="el-form-input">
@@ -144,7 +146,11 @@ import {
   getClassList,
   getCourseList
 } from "@/api/common/index";
-import { updateMessage, selectMessage } from "@/api/teacher/index";
+import {
+  updateMessage,
+  selectMessage,
+  uploadTeacherAvatar
+} from "@/api/teacher/index";
 import { getUserInfo, setUserInfo } from "@/utils/auth";
 export default {
   name: "Person",
@@ -167,7 +173,8 @@ export default {
       ClassList: [],
       courseList: [],
       message: "",
-      showUpdateBtn: true
+      showUpdateBtn: true,
+      avatarSrc: null
     };
   },
   created: function() {
@@ -219,6 +226,7 @@ export default {
           if (res.data.length > 0) {
             this.courseList = res.data;
             this.request.CourseId = this.requestOrigin.CourseId;
+            this.avatarSrc=this.requestOrigin.ImgLocation;
             if (this.requestOrigin.Name != null) {
               this.request.Name = this.requestOrigin.Name;
             }
@@ -315,8 +323,14 @@ export default {
     SelectImg: function() {
       SelectImg();
     },
-    UplodeImg: function() {
-      UplodeImg();
+    UplodeImg: function(event) {
+      var formData = new FormData();
+      formData.append("file", this.$refs.avatarInput.files[0]);
+      formData.append("userId", this.request.Id);
+      uploadTeacherAvatar(formData).then(res => {
+        console.log(res);
+        this.avatarSrc = res.data.data.urls
+      });
     }
   }
 };

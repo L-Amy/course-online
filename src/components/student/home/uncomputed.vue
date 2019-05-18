@@ -91,6 +91,11 @@ export default {
     }
   }
 };
+$(function(){
+  mui.init({
+    
+  })
+})
 </script>
 <style>
 .uncomputed-icon-header {

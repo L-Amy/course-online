@@ -20,8 +20,8 @@
 <script>
 import { getUserInfo } from "@/utils/auth";
 import { answerTask } from "@/api/task/index";
-import {AlertMessage} from "@/assets/js/index";
-import {askTask} from "@/api/task/index"
+import { AlertMessage } from "@/assets/js/index";
+import { askTask } from "@/api/task/index";
 
 export default {
   name: "UncomputedEdit",
@@ -43,25 +43,43 @@ export default {
   },
   methods: {
     answerTask() {
-      console.log(this.request);
-      answerTask(this.request).then(res => {
-        if (res.data.code == "1001") {
-          this.$route.push({
-            path: "/computed"
-          });
-        }else{
-            AlertMessage('回答失败')
-        }
-      });
+      if (
+        this.request.AnswerContent == "" ||
+        this.request.AnswerContent == undefined ||
+        this.request.AnswerContent == null
+      ) {
+        AlertMessage("提交内容不能为空");
+        return false;
+      } else {
+        console.log(this.request);
+        answerTask(this.request).then(res => {
+          if (res.data.code == "1001") {
+            this.$route.push({
+              path: "/computed"
+            });
+          } else {
+            AlertMessage("回答失败");
+          }
+        });
+      }
     },
-    askTask(){
-      this.request.TeacherId=this.$route.params.TeacherId;
-      console.log(this.request)
-      askTask(this.request).then(res=>{
-        if(res.data.code=='1000'){
-          AlertMessage(res.data.msg);
-        }
-      })
+    askTask() {
+      this.request.TeacherId = this.$route.params.TeacherId;
+      if (
+        this.request.AnswerContent == "" ||
+        this.request.AnswerContent == undefined ||
+        this.request.AnswerContent == null
+      ) {
+        AlertMessage("提问内容不能为空");
+        return false;
+      } else {
+        console.log(this.request);
+        askTask(this.request).then(res => {
+          if (res.data.code == "1000") {
+            AlertMessage(res.data.msg);
+          }
+        });
+      }
     }
   }
 };

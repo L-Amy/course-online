@@ -14,3 +14,11 @@ export function selectMessage(data){
         data
     })
 }
+
+export function uploadTeacherAvatar(data) {
+    return fetch({
+        url: '/upload/teacher/avatar',
+        method: 'post',
+        data
+    })
+}

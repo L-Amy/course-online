@@ -21,10 +21,12 @@
 
 .icon-xingbie:before {
   content: "\e637";
+  color: rgb(87, 151, 132)
 }
 
 .icon-listpress:before {
   content: "\e605";
+  color: rgb(134, 103, 80)
 }
 
 .icon-fangxiangxia:before {
@@ -53,10 +55,12 @@
 
 .icon-zhuanye:before {
   content: "\e606";
+  color: darkslategrey
 }
 
 .icon-myclass:before {
   content: "\e61c";
+  color: rgb(83, 114, 126);
 }
 
 .icon-weiwancheng-copy1:before {
@@ -73,6 +77,7 @@
 
 .icon-xingming:before {
   content: "\e649";
+  color: rgb(146, 88, 111)
 }
 
 .icon-yiwancheng1:before {
@@ -85,6 +90,7 @@
 
 .icon-yidongduanicon-:before {
   content: "\e616";
+  color: rgb(63, 107, 106)
 }
 
 .icon-weiwancheng1:before {
@@ -101,6 +107,7 @@
 
 .icon-gonghao:before {
   content: "\e64d";
+  color: darkolivegreen
 }
 
 .icon-liulantai-yipiyue:before {
@@ -121,6 +128,7 @@
 
 .icon-xueyuan:before {
   content: "\e661";
+  color: rgb(189, 105, 105)
 }
 
 .icon-yuebao:before {
@@ -129,6 +137,7 @@
 
 .icon-xuehao:before {
   content: "\e670";
+  color: darkolivegreen
 }
 
 .icon-weipiyue1:before {
@@ -137,6 +146,7 @@
 
 .icon-paperplane-fill:before {
   content: "\e7a9";
+  color: rgb(72, 110, 112)
 }
 
 .icon-icon-:before {
@@ -149,5 +159,6 @@
 
 .icon-ziyuanxhdpi:before {
   content: "\e62f";
+  color: rgb(122, 82, 82);
 }
 

@@ -21,3 +21,11 @@ export function getStudentList(data){
         data
     })
 }
+
+export function uploadStudentAvatar(data) {
+    return fetch({
+        url: '/upload/student/avatar',
+        method: 'post',
+        data
+    })
+}
