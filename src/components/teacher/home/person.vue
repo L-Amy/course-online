@@ -324,12 +324,13 @@ export default {
       SelectImg();
     },
     UplodeImg: function(event) {
+      var _self=this;
       var formData = new FormData();
       formData.append("file", this.$refs.avatarInput.files[0]);
       formData.append("userId", this.request.Id);
       uploadTeacherAvatar(formData).then(res => {
         console.log(res);
-        this.avatarSrc = res.data.data.urls
+        this.avatarSrc = res.data.data.url;
       });
     }
   }

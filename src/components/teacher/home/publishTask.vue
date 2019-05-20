@@ -45,8 +45,8 @@ export default {
         CourseId: 0,
         Name: ""
       },
-      data:{
-        TaskId:0,
+      data: {
+        TaskId: 0
       },
       classList: [],
       submitBtn: true,
@@ -77,24 +77,36 @@ export default {
     if (this.$route.params.Id > 0) {
       this.submitBtn = false;
       this.updateBtn = true;
-      console.log(this.$route.params.Id )
+      console.log(this.$route.params.Id);
       this.data.TaskId = this.$route.params.Id;
     }
   },
   methods: {
     submit() {
       if (this.classList.length > 0) {
-        for (let i = 0; i < this.classList.length; i++) {
+        var i = 0;
+        do {
           this.request.ClassId = this.classList[i].Id;
-          this.publishTask(this.request);
-        }
+          console.log(this.classList[i].Id);
+          if (this.publishTask(this.request)) {
+            i++;
+          } else {
+            break;
+          }
+        } while (i < this.classList.length);
+        this.$router.push({
+          path: "/taskList"
+        });
       }
     },
     update() {
       if (this.request.Id > 0) {
         if (this.checkInput()) {
-          console.log(this.request)
-          updateTask({TaskId:this.data.TaskId,Content:this.request.Content}).then(res => {
+          console.log(this.request);
+          updateTask({
+            TaskId: this.data.TaskId,
+            Content: this.request.Content
+          }).then(res => {
             if ((res.data.code = "1001")) {
               AlertMessage(res.data.msg);
               this.$router.push({
@@ -108,11 +120,11 @@ export default {
     publishTask() {
       if (this.checkInput()) {
         publishTask(this.request).then(res => {
-          this.message = res.data.msg;
-          AlertMessage(this.message);
-          this.$router.push({
-            path: "/taskList"
-          });
+          if (res.data.code == "1001") {
+            return true;
+          } else {
+            return false;
+          }
         });
       }
     },
