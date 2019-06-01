@@ -22,7 +22,7 @@
                   class="el-group-item"
                   v-for="(item,index) in taskList"
                   v-bind:key="item.Id"
-                  @click="markTask(item.Id,item.Content)"
+                  @click="markTask(item.Id,item.Content,item.AnswerContent)"
                 >{{index+1}}. {{item.Content}}</div>
               </div>
             </div>
@@ -36,7 +36,7 @@
                   class="el-group-item"
                   v-for="(item,index) in answerList"
                   v-bind:key="item.Id"
-                  @click="answerTask(item.Id,item.DisscusQuestion)"
+                  @click="answerTask(item.Id,item.DisscusQuestion,item.AnswerContent)"
                 >{{index+1}}. {{item.DisscusQuestion}}</div>
               </div>
             </div>
@@ -76,21 +76,23 @@ export default {
       });
       this.getAskList();
     },
-    markTask(TaskId, content) {
+    markTask(TaskId, content,answerContent) {
       this.$router.push({
         path: "/marktask",
         query: {
           Id: TaskId,
-          Content: content
+          Content: content,
+          AnswerContent:answerContent
         }
       });
     },
-    answerTask(id, content) {
+    answerTask(id, content,answerContent) {
       this.$router.push({
         path: "/marktask",
         query: {
           TaskId: id,
-          answerContent: content
+          answerContent: content,
+          AnswerContent:answerContent
         }
       });
     },

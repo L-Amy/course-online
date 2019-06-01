@@ -323,7 +323,7 @@ export default {
       formData.append("userId", this.request.Id);
       uploadStudentAvatar(formData).then(res => {
         console.log(res);
-        this.avatarSrc = res.data.data.urls
+        this.avatarSrc = res.data.data.url;
       });
     }
   }

@@ -54,7 +54,7 @@ export default {
         console.log(this.request);
         answerTask(this.request).then(res => {
           if (res.data.code == "1001") {
-            this.$route.push({
+            this.$router.push({
               path: "/computed"
             });
           } else {
@@ -75,9 +75,7 @@ export default {
       } else {
         console.log(this.request);
         askTask(this.request).then(res => {
-          if (res.data.code == "1000") {
             AlertMessage(res.data.msg);
-          }
         });
       }
     }

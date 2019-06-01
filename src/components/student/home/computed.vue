@@ -5,28 +5,13 @@
         id="sliderSegmentedControl"
         class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted"
       >
-        <a href="#marked" class="mui-control-item mui-active">已批阅</a>
-        <a href="#unmarked" class="mui-control-item">未批阅</a>
+        <a href="#unmarked" class="mui-control-item mui-active">未批阅</a>
+        <a href="#marked" class="mui-control-item">已批阅</a>
       </div>
       <div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6"></div>
       <div class="mui-slider-group">
         <div
           class="mui-slider-item mui-control-content mui-active"
-          id="marked"
-          style="min-height:calc(100vh)"
-        >
-          <div id="scroll1" class="mui-scroll-wrapper">
-            <div class="mui-scroll">
-              <div class="el-group">
-                <div class="el-group-item" v-for="(item,index) in markList" v-bind:key="item.Id" @click="markDetail(item.Id)">
-                  <router-link to="/markDetail">{{index+1}}. {{item.Content}}</router-link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="mui-slider-item mui-control-content"
           id="unmarked"
           style="min-height:calc(100vh)"
         >
@@ -38,6 +23,26 @@
                   v-for="(item,index) in unmarkList"
                   v-bind:key="item.Id"
                 >{{index+1}}. {{item.Content}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+         <div
+          class="mui-slider-item mui-control-content"
+          id="marked"
+          style="min-height:calc(100vh)"
+        >
+          <div id="scroll1" class="mui-scroll-wrapper">
+            <div class="mui-scroll">
+              <div class="el-group">
+                <div
+                  class="el-group-item"
+                  v-for="(item,index) in markList"
+                  v-bind:key="item.Id"
+                  @click="markDetail(item.Id)"
+                >
+                  <router-link to="/markDetail">{{index+1}}. {{item.Content}}</router-link>
+                </div>
               </div>
             </div>
           </div>
@@ -98,14 +103,14 @@ export default {
       this.getTask();
       this.TogglePopover();
     },
-    markDetail(taskId){
-      if(taskId>0){
+    markDetail(taskId) {
+      if (taskId > 0) {
         this.$router.push({
-          name:'markDetail',
-          params:{
-            Id:taskId,
+          name: "markDetail",
+          params: {
+            Id: taskId
           }
-        })
+        });
       }
     }
   }

@@ -3,6 +3,7 @@
         <div class="task-title">
             <span>题目：</span>
             <span v-if="markBtn">{{this.$route.query.Content}}</span>
+            <div v-if="markBtn" style="color:red">答案：{{this.$route.query.AnswerContent}}</div>
             <span v-if="answerBtn">{{this.$route.query.answerContent}}</span>
                     </div>
             <div class="edit-frame">

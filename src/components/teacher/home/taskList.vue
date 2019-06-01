@@ -36,7 +36,7 @@ export default {
       taskList: []
     };
   },
-  created: function() {
+  mounted: function() {
     var userInfo = getUserInfo();
     if (userInfo.Id > 0) {
       this.request.teacherId = userInfo.Id;
